@@ -3,7 +3,7 @@ package grailsblog
 class Comments {
 
     String name
-    String body
+    String comment
     static mapping = {
         table 'Comments'
         id column: 'comment_id'
@@ -13,6 +13,6 @@ class Comments {
     static belongsTo = [blogPost : BlogPost]
     static constraints = {
         name(blank: false)
-        body(blank: false)
+        comment(blank: false)
     }
 }

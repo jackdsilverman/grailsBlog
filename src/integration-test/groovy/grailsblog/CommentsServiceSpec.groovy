@@ -13,14 +13,9 @@ class CommentsServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
-        // TODO: Populate valid domain instances and return a valid ID
-        //new Comments(...).save(flush: true, failOnError: true)
-        //new Comments(...).save(flush: true, failOnError: true)
-        //Comments comments = new Comments(...).save(flush: true, failOnError: true)
-        //new Comments(...).save(flush: true, failOnError: true)
-        //new Comments(...).save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //comments.id
+        Comments comment = new Comments(name: "Jack", comment: "Hello Bob").save(flush: true, failOnError: true)
+        Comments comment1 = new Comments(name: "Jim", comment: "Hello Jack").save(flush: true, failOnError: true)
+        comments.id
     }
 
     void "test get"() {
@@ -38,34 +33,32 @@ class CommentsServiceSpec extends Specification {
 
         then:
         commentsList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
     }
 
     void "test count"() {
         setupData()
 
         expect:
-        commentsService.count() == 5
+        commentsService.count() == 2
     }
 
     void "test delete"() {
         Long commentsId = setupData()
 
         expect:
-        commentsService.count() == 5
+        commentsService.count() == 2
 
         when:
         commentsService.delete(commentsId)
         sessionFactory.currentSession.flush()
 
         then:
-        commentsService.count() == 4
+        commentsService.count() == 1
     }
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Comments comments = new Comments()
+        Comments comments = new Comments(name: "Saife", comment: "Hello Jim")
         commentsService.save(comments)
 
         then:
