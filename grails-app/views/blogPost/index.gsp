@@ -28,7 +28,8 @@
 
                 <div class="portalLink">
                     <div>
-                        <a href="/blogPost/show/${blogPost.blogID}">${blogPost.title}</a>
+                        <g:link controller="BlogPost" action="show" id="${blogPost.id}" params="[title: blogPost.title]">${blogPost.title}</g:link>
+                        %{--<a href="/blogPost/show/${this.BlogPost.blog_id}">${blogPost.title}</a>--}%
                     </div>
                         ${blogPost.body}
                     <div>
