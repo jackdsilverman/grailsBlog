@@ -3,6 +3,7 @@ package grailsblog
 class UrlMappings {
 
     static mappings = {
+
         "/$controller/$action?/$id?/$title?"{
             constraints {
                 // apply constraints here
