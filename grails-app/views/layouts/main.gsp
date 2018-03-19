@@ -14,7 +14,7 @@
     <g:layoutHead/>
 </head>
 <body>
-
+%{--
     <div class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -25,7 +25,6 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/#">
-		    <asset:image src="grails.svg" alt="Grails Logo"/>
                 </a>
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
@@ -34,11 +33,11 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>--}%
 
     <g:layoutBody/>
 
-    <div class="footer" role="contentinfo"></div>
+    %{--<div class="footer" role="contentinfo"></div>--}%
 
     <div id="spinner" class="spinner" style="display:none;">
         <g:message code="spinner.alt" default="Loading&hellip;"/>
