@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +31,10 @@
         <g:each var="blogPost" in="${blogPostList}">
             <div class="row">
                 <div class="individualPost col-md-12">
-                    <h2 class="col-md-12"><g:link class="blogTitle" controller="BlogPost" action="show"
+                    <h2 class="col-md-10"><g:link class="blogTitle" controller="BlogPost" action="show"
                                                   id="${blogPost.id}"
                                                   params="[title: blogPost.title]">${blogPost.title}</g:link></h2>
+                    <span><g:formatDate date="${blogPost.dateCreated}" format="yyyy-MM-dd HH:mm:ss"/></span>
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
