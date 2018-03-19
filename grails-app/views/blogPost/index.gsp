@@ -43,7 +43,7 @@
             </div>
         </g:each>
         <div class="pagination">
-            <g:paginate prev="Previous" next="Forward" total="${blogPostList}" controller="blogPost" action="index"/>
+            <g:paginate total = "${blogPostList ?: 0}"/>
         </div>
     </div>
 </div>

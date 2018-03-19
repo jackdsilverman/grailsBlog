@@ -1,31 +1,23 @@
-<!DOCTYPE html>
+<%@ page import="grailsblog.BlogPost"%>
+<!doctype html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'blogPost.label', default: 'BlogPost')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#show-blogPost" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
+<head>
+    <meta name="layout" content="main">
+    <title>grailsBlog | ${postInstance.title}</title>
+</head>
+<body>
+<div class="content">
+
+        <div class="buttonWrapper">
+            <g:link class="btn primary pull-left" controller="blogPost" action="create">Add a new post</g:link>
+            %{--<g:form controller="entry" action="delete" id="${postInstance.id}" class="pull-left">--}%
+                %{--<g:submitButton class="btn primary pull-left" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" value="Delete this post" name="delete"></g:submitButton>--}%
+            %{--</g:form>--}%
+            <g:link class="btn primary" controller="blogPost" action="edit" id="${postInstance.id}">Update this post</g:link>
         </div>
-        <div id="show-blogPost" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:display bean="blogPost" />
-            <g:form resource="${this.blogPost}" method="DELETE">
-                <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${this.blogPost}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
-            </g:form>
-        </div>
-    </body>
+        <hr style="width:98%;margin:0 auto;padding-top:15px;"/>
+
+    <g:render template="viewPost" bean="${postInstance}" var="blogPost" />
+</div>
+</body>
 </html>
