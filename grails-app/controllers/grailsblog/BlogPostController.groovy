@@ -12,8 +12,6 @@ class BlogPostController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond blogPostService.list(params), model:[blogPostCount: blogPostService.count()]
-//        [blogPostList: blogPostService.list(params), blogPostList: blogPostService.count()]
-//        [entryInstanceList: Entry.list(params), entryInstanceTotal: Entry.count()]
     }
 
     def show() {

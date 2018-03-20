@@ -33,7 +33,7 @@
                 <div class="individualPost col-md-12">
                     <h2 class="col-md-10"><g:link class="blogTitle" controller="BlogPost" action="show"
                                                   id="${blogPost.id}"
-                                                  params="[title: blogPost.title]">${blogPost.title}</g:link></h2>
+                                                  params="[year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH] +1, title: blogPost.title]">${blogPost.title}</g:link></h2>
                     <span><g:formatDate date="${blogPost.dateCreated}" format="yyyy-MM-dd HH:mm:ss"/></span>
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
