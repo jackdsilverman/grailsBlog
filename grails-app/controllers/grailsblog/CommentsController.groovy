@@ -2,6 +2,7 @@ package grailsblog
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 
 class CommentsController {
 
@@ -14,6 +15,14 @@ class CommentsController {
         respond commentsService.list(params), model:[commentsCount: commentsService.count()]
     }
 
+    def list(){
+        def comments = []
+        BlogPost blogPost = BlogPost.get(params.blogPostId)
+        if(blogPost){
+            comments = Comments.findAllByBlogPost(blogPost)
+        }
+        render comments as JSON
+    }
     def show(Long id) {
         respond commentsService.get(id)
     }
@@ -22,26 +31,21 @@ class CommentsController {
         respond new Comments(params)
     }
 
-    def save(Comments comments) {
-        if (comments == null) {
-            notFound()
-            return
+    def save() {
+        def model =[:]
+
+        BlogPost blogPost = BlogPost.get(params.blogPostId)
+        def comment = new Comments(params)
+        comment.blogPost = blogPost
+        if (!comment.save(flush: true)) {
+            model.success = false
+            model.errors = comment.errors
+        }else{
+            model.success = true;
+            model.message = message(code: 'default.created.message', args: [message(code: 'comment.label', default: 'Comment'), comment.id])
         }
 
-        try {
-            commentsService.save(comments)
-        } catch (ValidationException e) {
-            respond comments.errors, view:'create'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'comments.label', default: 'Comments'), comments.id])
-                redirect comments
-            }
-            '*' { respond comments, [status: CREATED] }
-        }
+        render model as JSON
     }
 
     def edit(Long id) {

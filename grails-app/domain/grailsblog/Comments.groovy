@@ -4,13 +4,14 @@ class Comments {
 
     String name
     String comment
+    Date dateCreated = new Date()
+    BlogPost blogPost
+
     static mapping = {
         table 'Comments'
-        id column: 'comment_id'
-        version: false
-
+        sort dateCreated: "desc"
     }
-    static belongsTo = [blogPost : BlogPost]
+    static belongsTo = BlogPost
     static constraints = {
         name(blank: false)
         comment(blank: false)

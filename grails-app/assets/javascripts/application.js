@@ -7,8 +7,7 @@
 //
 //= require jquery-2.2.0.min
 //= require bootstrap
-//= require_tree .
-//= require_self
+//= require_t
 
 if (typeof jQuery !== 'undefined') {
     (function($) {
