@@ -31,7 +31,7 @@
                     $("#commentSection").slideUp();
                     $("#commentList").html("");
                     $.each(data, function () {
-                        $("#commentList").append("<li><div><span class='dataComment'>" + this.dateCreated + "</span></div><pre>" + this.comment + "</pre></li>").slideDown()
+                        $("#commentList").append("<li class='commentItem'><div><span class='dataComment'>" + this.dateCreated + "</span></div><pre>" + this.comment + "</pre></li>").slideDown()
                     });
                 }
 
