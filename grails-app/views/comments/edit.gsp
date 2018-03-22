@@ -23,7 +23,7 @@
             <g:hiddenField name="id" value="${postInstance?.id}" />
             <g:hiddenField name="version" value="${postInstance?.version}" />
             <fieldset class="form">
-                <g:render template="form"/>
+                <g:render template="commentForm"/>
             </fieldset>
             <fieldset class="buttons">
                 <g:actionSubmit action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" class="btn primary large"/>

@@ -21,7 +21,7 @@
 </div><br>
 
 <div id="list-blogPost" class="row content" role="main">
-    <div class="blogPostList col-md-10 col-md-offset-1">
+    <div class="blogPostListing col-md-10 col-md-offset-1">
         <div class="col-md-12 titleBox">
             <div class="row">
                 <h1 class="titleHeader">Green Thumb</h1>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <g:each var="blogPost" in="${blogPostList}">
-            <div class="blogPost well">
+            <div class="blogPost">
                 <div class="row">
                     <div class="individualPost col-md-12">
                         <h2 class="col-md-10"><g:link class="blogTitle" controller="BlogPost" action="show"

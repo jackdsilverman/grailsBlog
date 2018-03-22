@@ -568,3 +568,45 @@ img.grails-logo {
     height:340px;
     margin-top:-10px;
 }
+.navigation{
+    background: url(../images/white80.png);
+}
+.blogName{
+    font-size: xx-large;
+    font-family: fantasy;
+    color: #3c763d;
+}
+div.blogPostListing{
+    background: url(../images/white80.png);
+    border-radius: 15px;
+
+}
+.blogTitle{
+    color: #000000;
+}
+.titleBox{
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 10px;
+    background-color: #e0cc47;
+    padding: 10px;
+    border: 5px;
+}
+.titleHeader{
+    color: #3c763d;
+    font-size: xx-large;
+    text-align: center;
+}
+.blogDescription{
+    font-size: large;
+    text-align: center;
+}
+.individualPost{
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 5px;
+    background-color: #e8e5e5 ;
+}
+.commentItem{
+    border: 1px;
+}
