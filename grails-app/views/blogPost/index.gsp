@@ -11,14 +11,7 @@
 <a href="#list-blogPost" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
                                                                default="Skip to content&hellip;"/></a>
 
-<div class="nav navigation" role="navigation">
-    <ul>
-        <li><span class="blogName">Green Thumb</span></li>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label"
-                                                              args="[entityName]"/></g:link></li>
-    </ul>
-</div><br>
+
 
 <div id="list-blogPost" class="row content" role="main">
     <div class="blogPostListing col-md-10 col-md-offset-1">
@@ -31,11 +24,12 @@
         <g:each var="blogPost" in="${blogPostList}">
             <div class="blogPost">
                 <div class="row">
+                    <span class="col-md-3 postDate"><g:formatDate date="${blogPost.dateCreated}" format="yyyy-MM-dd HH:mm:ss"/></span>
                     <div class="individualPost col-md-12">
                         <h2 class="col-md-10"><g:link class="blogTitle" controller="BlogPost" action="show"
                                                       id="${blogPost.id}"
                                                       params="[year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH] +1, title: blogPost.title]">${blogPost.title}</g:link></h2>
-                        <span><g:formatDate date="${blogPost.dateCreated}" format="yyyy-MM-dd HH:mm:ss"/></span>
+
                         <g:if test="${flash.message}">
                             <div class="message" role="status">${flash.message}</div>
                         </g:if>
@@ -44,7 +38,7 @@
                         <span class="col-md-12">${blogPost.body}</span>
                     </div>
                 </div>
-                <g:link controller="blogPost" action="show" id="${blogPost.id}" class="pull-right">Permalink</g:link>
+
 
             </div>
         </g:each>

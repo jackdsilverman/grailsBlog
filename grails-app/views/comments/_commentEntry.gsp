@@ -1,6 +1,6 @@
 <asset:javascript src="jquery-2.2.0.min.js"/>
 <%@ page import="grailsblog.Comments" %>
-<div class="col-md-3">
+<div class="col-md-3 displayComments">
     <div class="btn btn-default btn-success" id="displayCommentTextBox">Post A Comment</div>
 </div>
 
@@ -22,7 +22,7 @@
                     $("#commentSection").slideUp();
                     $("#commentList").html("");
                     $.each(data, function () {
-                        $("#commentList").append("<li class='commentItem col-md-8 col-md-offset-2 commentItem'>" +
+                        $("#commentList").append("<li class='commentItem col-md-12 commentItem'>" +
                             "<div><span class='dataComment'>" + this.dateCreated + "</span></div>" +
                             "<span>" + this.comment + "</span></li>").slideDown()
                     });

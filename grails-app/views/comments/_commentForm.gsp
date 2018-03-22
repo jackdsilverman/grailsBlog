@@ -2,17 +2,17 @@
 <g:form controller="comments" action="save" name="commentForm">
     <g:hiddenField name="blogPostId" value="${blogPost.id}"/>
     <div class="row" id="nameInput">
-        <label class="col-md-1 col-md-offset-3">Name:</label>
-        <g:textField class="col-md-2 " name="name"/>
+        <label class="col-sm-2">Name:</label>
+        <span class="col-sm-10"><g:textField class="nameTextField" name="name"/></span>
     </div>
 
     <div class="row" id="commentInput">
-        <label class="col-md-1 col-md-offset-3">Comment:</label>
-        <g:textArea name="comment"/>
+        <label class="col-sm-2">Comment:</label>
+        <span class="col-sm-10"><g:textArea class="commentTextArea" name="comment"/></span>
     </div>
 
     <div class="row" id="submitButton">
-        <g:submitButton class="col-md-1 col-md-offset-4 btn btn-primary" name="create" id="save"
-                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+        <span class="col-md-1  "><g:submitButton class=" btn btn-primary" name="create" id="save"
+                        value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
     </div>
 </g:form>
