@@ -15,7 +15,7 @@ html {
     background-image: -moz-linear-gradient(center top, #aaa, #ddd);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
     background-image: linear-gradient(top, #aaa, #ddd);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#aaaaaa', EndColorStr='#dddddd');
     background-repeat: no-repeat;
     height: 100%;
     /* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
@@ -78,15 +78,20 @@ img {
 .scaffold-list h1 {
     border: none;
 }
+.forceHeight{
+    min-height: 92vh;
 
+}
 .footer {
-    background: #424649;
-    color: #ffffff;
+    background: url(../images/white80.png);
+    color: #000000;
     clear: both;
     font-size: 0.8em;
     margin-top: 1.5em;
-    padding: 1em;
+    padding: 0.5em;
     min-height: 1em;
+    bottom: 0;
+    position: relative;
 }
 
 .footer a {
@@ -171,6 +176,9 @@ img {
 
 .nav li.dropdown.open ul.dropdown-menu {
     background-color: #424649;
+}
+.searchBar{
+
 }
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */
@@ -375,11 +383,11 @@ tr {
     border: 0;
 }
 
-tr>td:first-child, tr>th:first-child {
+tr > td:first-child, tr > th:first-child {
     padding-left: 1.25em;
 }
 
-tr>td:last-child, tr>th:last-child {
+tr > td:last-child, tr > th:last-child {
     padding-right: 1.25em;
 }
 
@@ -394,7 +402,7 @@ th {
     background-color: #efefef;
     background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
     color: #666666;
     font-weight: bold;
@@ -560,33 +568,38 @@ a.skip {
     background: #7c7c7c no-repeat 50% 30%;
     margin-bottom: 20px;
     color: white;
-    height:300px;
-    text-align:center;
+    height: 300px;
+    text-align: center;
 }
 
 img.grails-logo {
-    height:340px;
-    margin-top:-10px;
+    height: 340px;
+    margin-top: -10px;
 }
-.navigation{
+
+.navigation {
     background: url(../images/white80.png);
 }
-.blogName{
+
+.blogName {
     font-size: xx-large;
     font-family: fantasy;
     color: green !important;
 }
-div.blogPostListing{
+
+div.blogPostListing {
     background: url(../images/white80.png);
     border-radius: 15px;
     padding: 10px;
-
+    margin-bottom: 50px;
 
 }
-.blogTitle{
+
+.blogTitle {
     color: #000000;
 }
-.titleBox{
+
+.titleBox {
     border-radius: 15px;
     overflow: hidden;
     margin-bottom: 10px;
@@ -594,79 +607,99 @@ div.blogPostListing{
     padding: 10px;
     border: 5px;
 }
-.titleHeader{
+
+.titleHeader {
     color: #3c763d;
     font-size: xx-large;
     text-align: center;
 }
-.blogDescription{
+
+.blogDescription {
     font-size: large;
     text-align: center;
 }
-.individualPost{
+
+.individualPost {
     border-radius: 15px;
     overflow: hidden;
     margin: 5px;
     padding: 5px;
-    background-color: #e8e5e5 ;
+    background-color: #e8e5e5;
 }
-.displayComments{
+
+.displayComments {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.commentItem{
+
+.commentItem {
     border: 1px;
 }
 
-.commentTextArea{
+.commentTextArea {
     width: 40%;
     height: 150px;
 
 }
 
-#commentInput{
+#commentInput {
     margin: 10px;
 }
 
-#nameInput{
+#nameInput {
 
     margin: 10px;
 }
 
-.nameTextField{
+.nameTextField {
     width: 40%;
 }
-#save{
+
+#save {
     margin: 10px;
 }
-.postHeader{
+
+.postHeader {
     margin: 5px;
 }
-.titleTextField{
+
+.titleTextField {
     width: 40%;
 }
-.postTextArea{
+
+.postTextArea {
     width: 40%;
     height: 150px;
 }
-#title{
+
+#title {
     font-weight: bold;
     font-size: x-large;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-#commentList{
+
+#commentList {
     list-style-type: none;
 }
-.updateLink{
+
+.updateLink {
     text-decoration: none;
     color: white;
 
 }
-.updateLink:hover{
+
+.updateLink:hover {
     color: white;
 
 }
-.postDate{
+
+.postDate {
     margin-top: 20px;
+}
+
+.footerLinks {
+    font-family: fantasy;
+    color: green !important;
+    text-decoration: none;
 }

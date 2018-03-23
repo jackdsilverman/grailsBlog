@@ -21,6 +21,11 @@
                 <span class="blogDescription">A place to talk about all things gardening. Whether that be tips, questions, or just thoughts in general this is the place to come</span>
             </div>
         </div>
+        <g:form action="index" method="GET">
+            <div class="row">
+                <g:textField class="col-2 pull-right" name="query" value="${params.query}" placeHolder="Search for post"/>
+            </div>
+        </g:form>
         <g:each var="blogPost" in="${blogPostList}">
             <div class="blogPost">
                 <div class="row">
@@ -43,7 +48,7 @@
             </div>
         </g:each>
         <div class="pagination">
-            <g:paginate total = "${blogPostList ?: 0}"/>
+            <g:paginate total="${blogPostCount}" prev="Previous" next="Next" maxsteps="5" max="5"/>
         </div>
     </div>
 </div>

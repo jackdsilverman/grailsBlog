@@ -13,9 +13,12 @@
         <div class="blogPostListing col-md-10 col-md-offset-1">
             <div class="col-md-12"><g:formatDate date="${postInstance.dateCreated}" format="yyyy-MM-dd HH:mm:ss"/></div>
             <g:render template="viewPost" bean="${postInstance}" var="blogPost"/>
-            <span class="col-md-2 pull-right "><g:link class="updateLink btn btn-default btn-success"
-                                                       controller="blogPost" action="edit"
-                                                       id="${postInstance.id}">Update this post</g:link></span>
+            <span class="col-md-2"><g:link class="updateLink btn btn-default btn-success"
+                                           controller="blogPost" action="edit"
+                                           id="${postInstance.id}">Update this post</g:link></span>
+            <span class="col-md-2"><g:link class="deleteButton btn btn-default btn-danger"
+                                                      controller="blogPost" action="delete"
+                                                      id="${postInstance.id}">Delete</g:link></span>
         </div>
 
     </div>

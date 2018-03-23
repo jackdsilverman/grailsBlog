@@ -4,14 +4,18 @@ import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
 class BlogPostController {
-    def scaffold =BlogPost
     BlogPostService blogPostService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond blogPostService.list(params), model:[blogPostCount: blogPostService.count()]
+        def blogPostList = BlogPost.createCriteria().list (params) {
+            if (params.query) {
+                ilike("title", "%${params.query}%")
+            }
+        }
+        [blogPostList: blogPostList, blogPostCount: blogPostService.count()]
     }
 
     def show() {
