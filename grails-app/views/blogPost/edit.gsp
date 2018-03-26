@@ -31,7 +31,8 @@
                 <g:form method="post">
                     <g:render template="form"/>
                     <div class="row">
-                        <g:actionSubmit action="save" class="btn btn-primary" name="create" id="save"
+                        <g:actionSubmit action="update" class="btn btn-primary" name="create" id="save"
+                                        mapping=""
                                         value="${message(code: 'default.button.create.label', default: 'Create')}"/>
                         <g:actionSubmit action="delete" class="btn btn-danger"
                                         value="${message(code: 'default.button.delete.label', default: 'Delete')}"

@@ -14,8 +14,6 @@
             <span class="col-sm-10"><g:textArea class="postTextArea" name="body" value="${postInstance?.body}"/></span>
         </div>
 
-        <div class="row" id="submitButton">
 
-        </div>
     </div>
 </div>

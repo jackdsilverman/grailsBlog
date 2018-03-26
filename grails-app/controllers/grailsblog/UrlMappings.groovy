@@ -5,9 +5,8 @@ class UrlMappings {
     static mappings = {
 
         "/$controller/$action?/$id?/$year?/$month?/$title?"{
-            constraints {
-                // apply constraints here
-            }
+            controller: "blogPost"
+            action:"show"
         }
 
         "/blogPost"(controller: "blogPost", action: "index" )

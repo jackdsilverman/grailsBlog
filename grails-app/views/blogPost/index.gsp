@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +11,6 @@
                                                                default="Skip to content&hellip;"/></a>
 
 
-
 <div id="list-blogPost" class="row content" role="main">
     <div class="blogPostListing col-md-10 col-md-offset-1">
         <div class="col-md-12 titleBox">
@@ -23,17 +21,20 @@
         </div>
         <g:form action="index" method="GET">
             <div class="row">
-                <g:textField id="seaerchBar" class="col-2 pull-right" name="query" value="${params.query}" placeHolder="Search for post"/>
+                <g:textField id="seaerchBar" class="col-2 pull-right" name="query" value="${params.query}"
+                             placeHolder="Search for post"/>
             </div>
         </g:form>
         <g:each var="blogPost" in="${blogPostList}">
             <div class="blogPost">
                 <div class="row">
-                    <span class="col-md-3 postDate"><g:formatDate date="${blogPost.dateCreated}" format="yyyy-MM-dd HH:mm:ss"/></span>
+                    <span class="col-md-3 postDate"><g:formatDate date="${blogPost.dateCreated}"
+                                                                  format="yyyy-MM-dd HH:mm:ss"/></span>
+
                     <div class="individualPost col-md-12">
                         <h2 class="col-md-10"><g:link class="blogTitle" controller="BlogPost" action="show"
                                                       id="${blogPost.id}"
-                                                      params="[year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH] +1, title: blogPost.title]">${blogPost.title}</g:link></h2>
+                                                      params="[year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH] + 1, title: blogPost.title]">${blogPost.title}</g:link></h2>
 
                         <g:if test="${flash.message}">
                             <div class="message" role="status">${flash.message}</div>
@@ -43,7 +44,6 @@
                         <span class="col-md-12">${blogPost.body}</span>
                     </div>
                 </div>
-
 
             </div>
         </g:each>

@@ -31,6 +31,10 @@
             </div>
             <g:form controller="blogPost" action="save" name="blogPostForm">
                 <g:render template="form"/>
+                <div class="row" id="submitButton">
+                    <span class="col-sm-1  "><g:actionSubmit action="save" class=" btn btn-primary" name="create" id="save"
+                                                             value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+                </div>
             </g:form>
         </div>
     </div>

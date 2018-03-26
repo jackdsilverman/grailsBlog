@@ -1,6 +1,9 @@
 package grailsblog
 
 import grails.validation.ValidationException
+
+import javax.xml.bind.ValidationException
+
 import static org.springframework.http.HttpStatus.*
 
 class BlogPostController {
@@ -21,7 +24,7 @@ class BlogPostController {
     def show() {
         def postInstance = BlogPost.get(params.id)
         if (!postInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'blogpost.label', default: 'BlogPost'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), params.id])
             redirect(action: "index")
             return
         }
@@ -30,7 +33,8 @@ class BlogPostController {
     }
 
     def create() {
-        respond new BlogPost(params)
+       respond new BlogPost(params)
+
     }
 
     def save(BlogPost blogPost) {
@@ -49,10 +53,11 @@ class BlogPostController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), blogPost.id])
-                redirect blogPost
+                redirect(action: "show", id: blogPost.id, params: [year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH], title: blogPost.title])
             }
             '*' { respond blogPost, [status: CREATED] }
         }
+
     }
 
     def edit() {
@@ -92,11 +97,11 @@ class BlogPostController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'body.label', default: 'BlogPost'), postInstance.id])
-        redirect(action: "show", id: postInstance.id)
+        redirect(action: "show", params: [id: postInstance.id ,year: postInstance.dateCreated[Calendar.YEAR], month: postInstance.dateCreated[Calendar.MONTH], title: postInstance.title])
     }
 
-    def delete() {
-        def blogPost = BlogPost.get(params.id)
+    def delete(Long id) {
+        def blogPost = BlogPost.get(id)
         if (!blogPost) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
             redirect(action: "index")
@@ -104,16 +109,6 @@ class BlogPostController {
         }
         blogPost.delete(flush: true)
         redirect(action: "index")
-//        try {
-//
-//            flash.message = message(code: 'default.deleted.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
-//            redirect(action: "index")
-//        }
-//        catch (DataIntegrityViolationException e) {
-//            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
-//            redirect(action: "show", id: params.id)
-//        }
-
     }
 
     protected void notFound() {
