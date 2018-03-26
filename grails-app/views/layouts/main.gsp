@@ -19,7 +19,7 @@
     <div class="nav navigation" role="navigation">
         <ul>
             <li><a href="http://localhost:8080/blogPost" class="blogName">Green Thumb</a></li>
-            <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+            <li><a class="home" href="${createLink(uri: '/blogPost')}"><g:message code="default.home.label"/></a></li>
             <li><g:link class="create" action="create">Create A New Post</g:link></li>
         </ul>
     </div><br>

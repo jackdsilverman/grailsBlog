@@ -9,6 +9,7 @@
 <body>
 <a href="#create-blogPost" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
                                                                  default="Skip to content&hellip;"/></a>
+
 <div id="create-blogPost" class="content" role="main">
 
     <g:if test="${flash.message}">
@@ -28,7 +29,9 @@
             <div class="row">
                 <h1 class="postHeader">Create Blog Post</h1>
             </div>
-            <g:render template="form"/>
+            <g:form controller="blogPost" action="save" name="blogPostForm">
+                <g:render template="form"/>
+            </g:form>
         </div>
     </div>
 </div>

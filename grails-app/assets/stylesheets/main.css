@@ -622,7 +622,8 @@ div.blogPostListing {
 .individualPost {
     border-radius: 15px;
     overflow: hidden;
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 5px;
     background-color: #e8e5e5;
 }
@@ -702,4 +703,7 @@ div.blogPostListing {
     font-family: fantasy;
     color: green !important;
     text-decoration: none;
+}
+.postTextArea{
+margin-bottom: 5px;
 }

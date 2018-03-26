@@ -23,7 +23,7 @@
         </div>
         <g:form action="index" method="GET">
             <div class="row">
-                <g:textField class="col-2 pull-right" name="query" value="${params.query}" placeHolder="Search for post"/>
+                <g:textField id="seaerchBar" class="col-2 pull-right" name="query" value="${params.query}" placeHolder="Search for post"/>
             </div>
         </g:form>
         <g:each var="blogPost" in="${blogPostList}">

@@ -16,9 +16,7 @@
             <span class="col-md-2"><g:link class="updateLink btn btn-default btn-success"
                                            controller="blogPost" action="edit"
                                            id="${postInstance.id}">Update this post</g:link></span>
-            <span class="col-md-2"><g:link class="deleteButton btn btn-default btn-danger"
-                                                      controller="blogPost" action="delete"
-                                                      id="${postInstance.id}">Delete</g:link></span>
+
         </div>
 
     </div>

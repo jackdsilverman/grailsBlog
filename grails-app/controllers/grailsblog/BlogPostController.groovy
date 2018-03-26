@@ -6,11 +6,11 @@ import static org.springframework.http.HttpStatus.*
 class BlogPostController {
     BlogPostService blogPostService
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        def blogPostList = BlogPost.createCriteria().list (params) {
+        def blogPostList = BlogPost.createCriteria().list(params) {
             if (params.query) {
                 ilike("title", "%${params.query}%")
             }
@@ -42,7 +42,7 @@ class BlogPostController {
         try {
             blogPostService.save(blogPost)
         } catch (ValidationException e) {
-            respond blogPost.errors, view:'create'
+            respond blogPost.errors, view: 'create'
             return
         }
 
@@ -57,7 +57,7 @@ class BlogPostController {
 
     def edit() {
         def postInstance = BlogPost.get(params.id)
-        if(!postInstance){
+        if (!postInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'blogpost.label', default: 'BlogPosts'), params.id])
             redirect(action: "index")
             return
@@ -95,21 +95,25 @@ class BlogPostController {
         redirect(action: "show", id: postInstance.id)
     }
 
-    def delete(Long id) {
-        if (id == null) {
-            notFound()
+    def delete() {
+        def blogPost = BlogPost.get(params.id)
+        if (!blogPost) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
+            redirect(action: "index")
             return
         }
+        blogPost.delete(flush: true)
+        redirect(action: "index")
+//        try {
+//
+//            flash.message = message(code: 'default.deleted.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
+//            redirect(action: "index")
+//        }
+//        catch (DataIntegrityViolationException e) {
+//            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
+//            redirect(action: "show", id: params.id)
+//        }
 
-        blogPostService.delete(id)
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
     }
 
     protected void notFound() {
@@ -118,7 +122,7 @@ class BlogPostController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }
