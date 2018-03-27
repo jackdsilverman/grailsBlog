@@ -12,21 +12,21 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
 
         params["title"] = "First post"
         params["body"] = "This is my first blog post"
+        params["dateCreated"]=new Date(2018, 3, 27)
+    }
+    void setup(){
+        controller.blogPostService = Mock(BlogPostService)
+        populateValidParams(params)
+        new BlogPost(params).save(flush: true)
     }
 
     void "Test the index action returns the correct model"() {
-        given:
-        controller.blogPostService = Mock(BlogPostService) {
-            1 * list(_) >> []
-            1 * count() >> 0
-        }
-
         when:"The index action is executed"
-        controller.index()
+        controller.index(1)
 
         then:"The model is correct"
         !model.blogPostList
-        model.blogPostCount == 0
+        model.blogPostCount == 1
     }
 
     void "Test the create action returns the correct model"() {
@@ -44,7 +44,7 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
         controller.save(null)
 
         then:"A 404 error is returned"
-        response.redirectedUrl == '/blogPost/index'
+        response.redirectedUrl == '/blogPost'
         flash.message != null
     }
 
@@ -65,7 +65,7 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
         controller.save(blogPost)
 
         then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/blogPost/show/1'
+        response.redirectedUrl == '/blogPost/show/1/2018/3/First%20post'
         controller.flash.message != null
     }
 
@@ -73,7 +73,7 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
         given:
         controller.blogPostService = Mock(BlogPostService) {
             1 * save(_ as BlogPost) >> { BlogPost blogPost ->
-                throw new ValidationException("Invalid instance", blogPost.errors)
+                throw new ValidationException("Invalid", blogPost.errors)
             }
         }
 

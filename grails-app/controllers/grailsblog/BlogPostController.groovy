@@ -53,7 +53,7 @@ class BlogPostController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), blogPost.id])
-                redirect(action: "show", id: blogPost.id, params: [year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH], title: blogPost.title])
+                redirect(action: "show", id: blogPost.id, params: [year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH] +1, title: blogPost.title])
             }
             '*' { respond blogPost, [status: CREATED] }
         }
@@ -97,7 +97,7 @@ class BlogPostController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'body.label', default: 'BlogPost'), postInstance.id])
-        redirect(action: "show", params: [id: postInstance.id ,year: postInstance.dateCreated[Calendar.YEAR], month: postInstance.dateCreated[Calendar.MONTH], title: postInstance.title])
+        redirect(action: "show", params: [id: postInstance.id ,year: postInstance.dateCreated[Calendar.YEAR], month: postInstance.dateCreated[Calendar.MONTH]+ 1, title: postInstance.title])
     }
 
     def delete(Long id) {
