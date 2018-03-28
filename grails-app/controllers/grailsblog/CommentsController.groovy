@@ -2,13 +2,13 @@ package grailsblog
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 
-
 class CommentsController {
-
+    def springSecurityService
     CommentsService commentsService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -28,6 +28,7 @@ class CommentsController {
         BlogPost blogPost = BlogPost.get(params.blogPostId)
         def comment = new Comments(params)
         comment.blogPost = blogPost
+        comment.username = springSecurityService.principal.username
         if (!comment.save(flush: true)) {
             model.success = false
             model.errors = comment.errors

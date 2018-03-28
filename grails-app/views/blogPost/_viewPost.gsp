@@ -8,5 +8,5 @@
     <div class="col-md-4"><h2 id="title">${blogPost.title}</h2></div>
 
     <span class="col-md-12" id="body">${blogPost.body}</span>
-    <g:render template="/comments/commentEntry" bean="${blogPost}" var="blogPost"/>
+    <g:render template="/comments/commentEntry" bean="${blogPost}"  var="blogPost"/>
 </div>

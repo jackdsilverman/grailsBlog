@@ -1,8 +1,10 @@
 package grailsblog
 
+import com.blog.security.User
+
 class Comments {
 
-    String name
+    String username
     String comment
     Date dateCreated = new Date()
     BlogPost blogPost
@@ -13,7 +15,6 @@ class Comments {
     }
     static belongsTo = BlogPost
     static constraints = {
-        name(blank: false)
         comment(blank: false)
     }
 }
