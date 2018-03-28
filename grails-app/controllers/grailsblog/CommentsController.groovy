@@ -2,7 +2,6 @@ package grailsblog
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT

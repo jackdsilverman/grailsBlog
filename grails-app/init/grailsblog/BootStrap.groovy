@@ -21,8 +21,8 @@ class BootStrap {
         def bloggerRole = new Role(authority: "ROLE_ADMIN").save()
         def commentRole = new Role(authority: "ROLE_COMMENTER").save()
 
-        def testUser = new User(username: 'me', password: 'password').save()
-        def commentUser = new User(username: "commenter", password: "4321abcd").save()
+        def testUser = new User(username: 'me',enabled: true, password: 'password').save()
+        def commentUser = new User(username: "commenter",enabled: true, password: "4321abcd").save()
 
         UserRole.create testUser, bloggerRole
         UserRole.create commentUser, commentRole
@@ -32,9 +32,6 @@ class BootStrap {
             it.clear()
         }
 
-        assert User.count() == 2
-        assert Role.count() == 2
-        assert UserRole.count() == 2
     }
     def destroy = {
     }
