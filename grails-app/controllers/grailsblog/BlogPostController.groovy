@@ -1,16 +1,16 @@
 package grailsblog
 
-import grails.validation.ValidationException
-
 import javax.xml.bind.ValidationException
+import grails.plugin.springsecurity.annotation.Secured
 
-import static org.springframework.http.HttpStatus.*
+import static org.springframework.http.HttpStatus.CREATED
+import static org.springframework.http.HttpStatus.NOT_FOUND
 
 class BlogPostController {
     BlogPostService blogPostService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def blogPostList = BlogPost.createCriteria().list(params) {
