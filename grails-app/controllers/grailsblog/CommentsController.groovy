@@ -1,20 +1,18 @@
 package grailsblog
 
-import grails.validation.ValidationException
-import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
+
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.NO_CONTENT
+
 
 class CommentsController {
 
     CommentsService commentsService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond commentsService.list(params), model:[commentsCount: commentsService.count()]
-    }
-
+    @Secured(['ROLE_ADMIN'])
     def list(){
         def comments = []
         BlogPost blogPost = BlogPost.get(params.blogPostId)
@@ -23,14 +21,7 @@ class CommentsController {
         }
         render comments as JSON
     }
-    def show(Long id) {
-        respond commentsService.get(id)
-    }
-
-    def create() {
-        respond new Comments(params)
-    }
-
+    @Secured(['ROLE_ADMIN'])
     def save() {
         def model =[:]
 
@@ -47,33 +38,7 @@ class CommentsController {
 
         render model as JSON
     }
-
-    def edit(Long id) {
-        respond commentsService.get(id)
-    }
-
-    def update(Comments comments) {
-        if (comments == null) {
-            notFound()
-            return
-        }
-
-        try {
-            commentsService.save(comments)
-        } catch (ValidationException e) {
-            respond comments.errors, view:'edit'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'comments.label', default: 'Comments'), comments.id])
-                redirect comments
-            }
-            '*'{ respond comments, [status: OK] }
-        }
-    }
-
+    @Secured(['ROLE_ADMIN'])
     def delete(Long id) {
         if (id == null) {
             notFound()
@@ -90,7 +55,6 @@ class CommentsController {
             '*'{ render status: NO_CONTENT }
         }
     }
-
     protected void notFound() {
         request.withFormat {
             form multipartForm {

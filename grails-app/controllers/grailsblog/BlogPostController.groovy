@@ -20,7 +20,7 @@ class BlogPostController {
         }
         [blogPostList: blogPostList, blogPostCount: blogPostService.count()]
     }
-
+    @Secured(['ROLE_ADMIN'])
     def show() {
         def postInstance = BlogPost.get(params.id)
         if (!postInstance) {
@@ -31,12 +31,12 @@ class BlogPostController {
 
         [postInstance: postInstance]
     }
-
+    @Secured(['ROLE_ADMIN'])
     def create() {
        respond new BlogPost(params)
 
     }
-
+    @Secured(['ROLE_ADMIN'])
     def save(BlogPost blogPost) {
         if (blogPost == null) {
             notFound()
@@ -59,7 +59,7 @@ class BlogPostController {
         }
 
     }
-
+    @Secured(['ROLE_ADMIN'])
     def edit() {
         def postInstance = BlogPost.get(params.id)
         if (!postInstance) {
@@ -69,7 +69,7 @@ class BlogPostController {
         }
         [postInstance: postInstance]
     }
-
+    @Secured(['ROLE_ADMIN'])
     def update() {
         def postInstance = BlogPost.get(params.id)
         if (!postInstance) {
@@ -99,7 +99,7 @@ class BlogPostController {
         flash.message = message(code: 'default.updated.message', args: [message(code: 'body.label', default: 'BlogPost'), postInstance.id])
         redirect(action: "show", params: [id: postInstance.id ,year: postInstance.dateCreated[Calendar.YEAR], month: postInstance.dateCreated[Calendar.MONTH]+ 1, title: postInstance.title])
     }
-
+    @Secured(['ROLE_ADMIN'])
     def delete(Long id) {
         def blogPost = BlogPost.get(id)
         if (!blogPost) {
