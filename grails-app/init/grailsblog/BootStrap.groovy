@@ -18,20 +18,23 @@ class BootStrap {
         new BlogPost(title: "Ninth Post", body: "Hello I am Jack").save()
         new BlogPost(title: "Tenth Post", body: "Hello I am Jack").save()
 
-        def adminRole = new Role(authority: 'ROLE_ADMIN').save()
+        def bloggerRole = new Role(authority: "ROLE_ADMIN").save()
+        def commentRole = new Role(authority: "ROLE_COMMENTER").save()
 
         def testUser = new User(username: 'me', password: 'password').save()
+        def commentUser = new User(username: "commenter", password: "4321abcd").save()
 
-        UserRole.create testUser, adminRole
+        UserRole.create testUser, bloggerRole
+        UserRole.create commentUser, commentRole
 
         UserRole.withSession {
             it.flush()
             it.clear()
         }
 
-        assert User.count() == 1
-        assert Role.count() == 1
-        assert UserRole.count() == 1
+        assert User.count() == 2
+        assert Role.count() == 2
+        assert UserRole.count() == 2
     }
     def destroy = {
     }

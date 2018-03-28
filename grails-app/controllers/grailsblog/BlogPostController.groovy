@@ -10,7 +10,7 @@ class BlogPostController {
     BlogPostService blogPostService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_COMMENTER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def blogPostList = BlogPost.createCriteria().list(params) {
@@ -20,7 +20,7 @@ class BlogPostController {
         }
         [blogPostList: blogPostList, blogPostCount: blogPostService.count()]
     }
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN','ROLE_COMMENTER'])
     def show() {
         def postInstance = BlogPost.get(params.id)
         if (!postInstance) {

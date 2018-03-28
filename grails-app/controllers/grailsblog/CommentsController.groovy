@@ -12,7 +12,7 @@ class CommentsController {
     CommentsService commentsService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_COMMENTER'])
     def list(){
         def comments = []
         BlogPost blogPost = BlogPost.get(params.blogPostId)
@@ -21,7 +21,7 @@ class CommentsController {
         }
         render comments as JSON
     }
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_COMMENTER'])
     def save() {
         def model =[:]
 
@@ -38,7 +38,7 @@ class CommentsController {
 
         render model as JSON
     }
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_COMMENTER'])
     def delete(Long id) {
         if (id == null) {
             notFound()
