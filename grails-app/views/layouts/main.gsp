@@ -34,12 +34,17 @@
     <asset:javascript src="application.js"/>
 
 </div>
+
 <div class="footer" role="contentinfo">
-    <span class="col-md-4 col-md-offset-2">This blog was created by: Saife Akhter and Jack Silverman</span>
+    <span class="col-md-3">This blog was created by: Saife Akhter and Jack Silverman</span>
     <span class="trademarked col-md-2">&copy; 2018 <a href="http://localhost:8080/blogPost"
                                                       class="footerLinks">Green Thumb</a></span>
-    <span>Feel free to check out the code on <a href="https://github.com/jackdsilverman/grailsBlog"
-                                                class="footerLinks">GitHub</a></span>
+    <span class="col-md-3">Feel free to check out the code on <a href="https://github.com/jackdsilverman/grailsBlog"
+                                                                 class="footerLinks">GitHub</a></span>
+    <span class="col-md-2"><a href="https://www.linkedin.com/in/jack-silverman-b348b3150"
+                              class="footerLinks">Jack's LinkedIn</a></span>
+    <span><a href="https://www.linkedin.com/in/saife-akhter-6123aa142/"
+                               class="footerLinks">Saife's LinkedIn</a></span>
 </div>
 </body>
 </html>
