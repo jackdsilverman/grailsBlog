@@ -166,14 +166,6 @@ img {
     background-image: url(../images/skin/house.png);
 }
 
-.nav a.list {
-    background-image: url(../images/skin/database_table.png);
-}
-
-.nav a.create {
-    background-image: url(../images/skin/database_add.png);
-}
-
 .nav li.dropdown.open ul.dropdown-menu {
     background-color: #424649;
 }
@@ -635,6 +627,9 @@ div.blogPostListing {
 
 .commentItem {
     border: 1px;
+    border-style: solid;
+    border-radius: 15px;
+    margin: 2px;
 }
 
 .commentTextArea {

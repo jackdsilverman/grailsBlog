@@ -21,7 +21,7 @@
             <li><a href="http://localhost:8080/blogPost" class="blogName">Green Thumb</a></li>
             <li><a class="home" href="${createLink(uri: '/blogPost')}"><g:message code="default.home.label"/></a></li>
             <sec:ifAnyGranted roles="ROLE_ADMIN">
-                <li><g:link class="create" action="create">Create A New Post</g:link></li>
+                <li class=""><g:link class="create" action="create">Create A New Post</g:link></li>
             </sec:ifAnyGranted>
             <li><a href="${createLink(uri: '/login')}" class="login">Login</a></li>
             <li><a href="${createLink(uri: '/logout')}" class="logout">Logout</a></li>

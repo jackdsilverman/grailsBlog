@@ -14,6 +14,7 @@
     $(function () {
         $("#displayCommentTextBox").click(function (evt) {
             $("#commentSection").toggle()
+            $("#commentForm")[0].reset();
         });
         var updateCommentList = function () {
             $.ajax({
@@ -23,9 +24,10 @@
                     $("#commentSection").slideUp();
                     $("#commentList").html("");
                     $.each(data, function () {
-                        $("#commentList").append("<li class='commentItem col-md-12'><div><span class='username col-md-2'>" + this.username + "</span>" +
-                            "<span class='dataComment col-md-4'>" + this.dateCreated + "</span></div>" +
-                            "<div><span>" + this.comment + "</span></div></li>").slideDown()
+                        var username = "<div><span class='username col-md-2'>" + this.username + "</span>"
+                        var dateCreated = "<span class='dataComment col-md-4'>" + this.dateCreated + "</span></div>"
+                        var comment = "<span class='col-md-12'>" + this.comment + "</span>"
+                        $("#commentList").append("<li class='commentItem col-md-12'>"+ username+ dateCreated+ comment+"</li>").slideDown()
                     });
                 }
 
@@ -43,6 +45,7 @@
                 success: function (data) {
                     if (data.success) {
                         updateCommentList();
+
                     }
                 },
             })
