@@ -1,16 +1,13 @@
 package grailsblog
 
-import javax.xml.bind.ValidationException
 import grails.plugin.springsecurity.annotation.Secured
 
-import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
 class BlogPostController {
     BlogPostService blogPostService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    @Secured(['ROLE_ADMIN', 'ROLE_COMMENTER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def blogPostList = BlogPost.createCriteria().list(params) {
@@ -18,9 +15,10 @@ class BlogPostController {
                 ilike("title", "%${params.query}%")
             }
         }
-        [blogPostList: blogPostList, blogPostCount: blogPostService.count()]
+//        List<BlogPost> blogPostList = blogPostService.list(params)
+//        respond blogPostList, model:[blogPostCount: blogPostService.count()]
+        model: [blogPostList: blogPostList, blogPostCount: blogPostService.count()]
     }
-    @Secured(['ROLE_ADMIN','ROLE_COMMENTER'])
     def show() {
         def postInstance = BlogPost.get(params.id)
         if (!postInstance) {
@@ -37,26 +35,21 @@ class BlogPostController {
 
     }
     @Secured(['ROLE_ADMIN'])
-    def save(BlogPost blogPost) {
+    def save() {
+        def blogPost = new BlogPost(params)
         if (blogPost == null) {
             notFound()
             return
         }
-
-        try {
-            blogPostService.save(blogPost)
-        } catch (ValidationException e) {
-            respond blogPost.errors, view: 'create'
+        if(!blogPost.save(flush:true)){
+            respond(blogPost.errors, view: "create")
             return
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), blogPost.id])
-                redirect(action: "show", id: blogPost.id, params: [year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH] +1, title: blogPost.title])
-            }
-            '*' { respond blogPost, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), blogPost.id])
+        redirect(action: "show", id: blogPost.id, params: [year: blogPost.dateCreated[Calendar.YEAR], month: blogPost.dateCreated[Calendar.MONTH] +1, title: blogPost.title])
+
+
 
     }
     @Secured(['ROLE_ADMIN'])

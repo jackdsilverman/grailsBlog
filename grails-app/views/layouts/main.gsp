@@ -20,7 +20,9 @@
         <ul>
             <li><a href="http://localhost:8080/blogPost" class="blogName">Green Thumb</a></li>
             <li><a class="home" href="${createLink(uri: '/blogPost')}"><g:message code="default.home.label"/></a></li>
-            <li><g:link class="create" action="create">Create A New Post</g:link></li>
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <li><g:link class="create" action="create">Create A New Post</g:link></li>
+            </sec:ifAnyGranted>
             <li><a href="${createLink(uri: '/login')}" class="login">Login</a></li>
             <li><a href="${createLink(uri: '/logout')}" class="logout">Logout</a></li>
         </ul>
@@ -46,7 +48,7 @@
     <span class="col-md-2"><a href="https://www.linkedin.com/in/jack-silverman-b348b3150"
                               class="footerLinks">Jack's LinkedIn</a></span>
     <span><a href="https://www.linkedin.com/in/saife-akhter-6123aa142/"
-                               class="footerLinks">Saife's LinkedIn</a></span>
+             class="footerLinks">Saife's LinkedIn</a></span>
 </div>
 </body>
 </html>
