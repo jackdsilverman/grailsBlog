@@ -5,21 +5,14 @@ import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 
 
-@Secured(['ROLE_ADMIN'])
+
 class UserController {
 
     UserService userService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model:[userCount: userService.count()]
-    }
 
-    def show(Long id) {
-        respond userService.get(id)
-    }
 
     def create() {
         respond new User(params)
@@ -38,17 +31,7 @@ class UserController {
             return
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
-            }
-            '*' { respond user, [status: CREATED] }
-        }
-    }
-
-    def edit(Long id) {
-        respond userService.get(id)
+        redirect(controller: "blogPost", action: "index")
     }
 
     def update(User user) {
@@ -73,22 +56,6 @@ class UserController {
         }
     }
 
-    def delete(Long id) {
-        if (id == null) {
-            notFound()
-            return
-        }
-
-        userService.delete(id)
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
 
     protected void notFound() {
         request.withFormat {

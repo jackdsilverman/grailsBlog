@@ -23,8 +23,13 @@
             <sec:ifAnyGranted roles="ROLE_ADMIN">
                 <li class=""><g:link class="create" action="create">Create A New Post</g:link></li>
             </sec:ifAnyGranted>
-            <li><a href="${createLink(uri: '/login')}" class="login">Login</a></li>
-            <li><a href="${createLink(uri: '/logout')}" class="logout">Logout</a></li>
+            <sec:ifLoggedIn>
+                <li><a href="${createLink(uri: '/logout')}" class="logout">Logout</a></li>
+            </sec:ifLoggedIn>
+            <sec:ifNotLoggedIn>
+                <li><a href="${createLink(uri: '/login')}" class="login">Login</a></li>
+                <li><g:link controller="user" action="create">Create a profile</g:link></li>
+            </sec:ifNotLoggedIn>
         </ul>
     </div><br>
 
