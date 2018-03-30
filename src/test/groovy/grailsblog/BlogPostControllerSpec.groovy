@@ -17,7 +17,6 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
     }
     void setup(){
         controller.blogPostService = Mock(BlogPostService)
-        populateValidParams(params)
     }
 
     def "Test the index action returns the correct model"() {
@@ -50,6 +49,7 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
         response.reset()
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
+        populateValidParams(params)
         def blogPost = new BlogPost(params)
         blogPost.id = 1
 
@@ -64,6 +64,7 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
+        populateValidParams(params)
         BlogPost blogPost = new BlogPost(null)
         controller.save()
 
@@ -81,8 +82,9 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
 
     void "Test the show action with a valid id"() {
         when:"A domain instance is passed to the show action"
-        new BlogPost(params).save(flush:true)
-        def model =controller.show()
+        populateValidParams(params)
+        BlogPost blogPost = new BlogPost(params).save(flush:true)
+        def model = controller.show(blogPost.id)
 
         then:"A model is populated containing the domain instance"
         model.postInstance != null
@@ -93,27 +95,29 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
         when:"The show action is executed with a null domain"
         controller.edit(null)
 
-        then:"A 404 error is returned"
-        response.status == 404
-    }
+        then:"A 302 is returned"
+        response.status == 302
+}
 
     void "Test the edit action with a valid id"() {
         when:"A domain instance is passed to the show action"
-        controller.edit(2)
+        populateValidParams(params)
+        BlogPost blogPost = new BlogPost(params).save(flush:true)
+        def model = controller.show(blogPost.id)
 
         then:"A model is populated containing the domain instance"
-        model.blogPost instanceof BlogPost
+        model.postInstance instanceof BlogPost
     }
 
 
     void "Test the update action with a null instance"() {
         when:"Save is called for a domain instance that doesn't exist"
         request.contentType = FORM_CONTENT_TYPE
-        request.method = 'PUT'
+        request.method = 'post'
         controller.update(null)
 
         then:"A 404 error is returned"
-        response.redirectedUrl == '/blogPost/index'
+        response.redirectedUrl == '/blogPost'
         flash.message != null
     }
 
@@ -122,15 +126,13 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
         when:"The save action is executed with a valid instance"
         response.reset()
         request.contentType = FORM_CONTENT_TYPE
-        request.method = 'PUT'
+        request.method = 'post'
         populateValidParams(params)
-        def blogPost = new BlogPost(params)
-        blogPost.id = 1
-
+        BlogPost blogPost = new BlogPost(params)
         controller.update(blogPost)
 
         then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/blogPost/show/1'
+        response.redirectedUrl == '/blogPost/show/1/2018/3/First%20post'
         controller.flash.message != null
     }
 
@@ -138,22 +140,24 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
 
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
-        request.method = 'PUT'
-        controller.update(new BlogPost())
+        request.method = 'post'
+        BlogPost blogPost = new BlogPost()
+        blogPost.title = null
+        blogPost.body = "jaja"
+        controller.update(blogPost)
 
         then:"The edit view is rendered again with the correct model"
-        model.blogPost != null
-        view == 'edit'
+        view == "/blogPost/edit"
     }
 
     void "Test the delete action with a null instance"() {
         when:"The delete action is called for a null instance"
         request.contentType = FORM_CONTENT_TYPE
-        request.method = 'DELETE'
+        request.method = 'post'
         controller.delete(null)
 
         then:"A 404 is returned"
-        response.redirectedUrl == '/blogPost/index'
+        response.redirectedUrl == '/blogPost'
         flash.message != null
     }
 
@@ -161,17 +165,11 @@ class BlogPostControllerSpec extends Specification implements ControllerUnitTest
 
         when:"The domain instance is passed to the delete action"
         request.contentType = FORM_CONTENT_TYPE
-        request.method = 'DELETE'
+        request.method = 'post'
         controller.delete(2)
 
         then:"The user is redirected to index"
-        response.redirectedUrl == '/blogPost/index'
+        response.redirectedUrl == '/blogPost'
         flash.message != null
     }
 }
-
-
-
-
-
-

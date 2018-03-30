@@ -20,7 +20,7 @@
                             error="${error}"/></li>
                 </g:eachError>
             </ul>
-        </g:hasErrors>*
+        </g:hasErrors>
 
 
         <div class="row">

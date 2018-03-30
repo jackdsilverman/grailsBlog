@@ -15,12 +15,10 @@ class BlogPostController {
                 ilike("title", "%${params.query}%")
             }
         }
-//        List<BlogPost> blogPostList = blogPostService.list(params)
-//        respond blogPostList, model:[blogPostCount: blogPostService.count()]
         model: [blogPostList: blogPostList, blogPostCount: blogPostService.count()]
     }
-    def show() {
-        def postInstance = BlogPost.get(params.id)
+    def show(Long id) {
+        def postInstance = BlogPost.get(id)
         if (!postInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'blogPost.label', default: 'BlogPost'), params.id])
             redirect(action: "index")
@@ -53,8 +51,8 @@ class BlogPostController {
 
     }
     @Secured(['ROLE_ADMIN'])
-    def edit() {
-        def postInstance = BlogPost.get(params.id)
+    def edit(Long id) {
+        def postInstance = BlogPost.get(id)
         if (!postInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'blogpost.label', default: 'BlogPosts'), params.id])
             redirect(action: "index")
@@ -63,8 +61,8 @@ class BlogPostController {
         [postInstance: postInstance]
     }
     @Secured(['ROLE_ADMIN'])
-    def update() {
-        def postInstance = BlogPost.get(params.id)
+    def update(BlogPost postInstance) {
+
         if (!postInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'body.label', default: 'BlogPost'), params.id])
             redirect(action: "index")
@@ -94,7 +92,7 @@ class BlogPostController {
     }
     @Secured(['ROLE_ADMIN'])
     def delete(Long id) {
-        def blogPost = BlogPost.get(id)
+        BlogPost blogPost = BlogPost.get(id)
         if (!blogPost) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
             redirect(action: "index")
