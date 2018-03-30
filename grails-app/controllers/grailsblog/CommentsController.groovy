@@ -11,7 +11,6 @@ class CommentsController {
     CommentsService commentsService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-    @Secured(['ROLE_ADMIN', 'ROLE_COMMENTER'])
     def list(){
         def comments = []
         BlogPost blogPost = BlogPost.get(params.blogPostId)

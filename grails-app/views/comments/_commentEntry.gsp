@@ -4,12 +4,13 @@
     <div class="col-md-3 displayComments">
         <div class="btn btn-default btn-success" id="displayCommentTextBox">Post A Comment</div>
     </div>
-
+</sec:ifAnyGranted>
     <div class="col-md-12" id="commentSection" style="display: none">
         <g:render template="/comments/commentForm" bean="${blogPost}" var="blogPost"/>
     </div>
+
     <ul id="commentList"></ul>
-</sec:ifAnyGranted>
+
 <script type="text/javascript">
     $(function () {
         $("#displayCommentTextBox").click(function (evt) {
