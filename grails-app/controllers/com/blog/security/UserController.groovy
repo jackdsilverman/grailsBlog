@@ -25,13 +25,19 @@ class UserController {
         }
 
         try {
+            def commentRole = Role.findByAuthority('ROLE_COMMENTER')
             userService.save(user)
+            UserRole.create(user, commentRole)
+            UserRole.withSession {
+                it.flush()
+                it.clear()
+            }
         } catch (ValidationException e) {
             respond user.errors, view:'create'
             return
         }
 
-        redirect(controller: "blogPost", action: "index")
+        redirect(uri: "/login/auth")
     }
 
     def update(User user) {
